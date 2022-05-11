@@ -1,4 +1,3 @@
-from cgi import test
 import datetime
 
 class TransitAgent:
@@ -17,8 +16,6 @@ class TransitAgent:
     def checkCar(self,car,testDatetime):
         weekday=testDatetime.weekday()
         lastDigit=str(car.getPlatenumber())[-1]
-        hour=testDatetime.hour
-        minute=testDatetime.minute 
         dateReestrict=datetime.datetime(testDatetime.year, testDatetime.month, testDatetime.day)
         reestrictPlates=self.dayReestrictions[str(weekday)]
 
@@ -28,6 +25,7 @@ class TransitAgent:
                 newdateUpper = dateReestrict.replace(hour=int(value[1].split(":")[0]), minute=int(value[1].split(":")[1]))
                 if(testDatetime<=newdateUpper and testDatetime>=newdateLower):
                     car.disableDrive()
-                    return
+                    return False
                 else:
                     car.enableDrive()
+        return True

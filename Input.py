@@ -6,15 +6,18 @@ class Input(ABC):
     @abstractmethod
     def retrieve(self):
         pass
+
     @abstractmethod
     def check(self):
         pass
+
     def getValue(self):
         return self.value
 
 class Plate(Input):
     def retrieve(self):
         self.value=input("Input plate:\t")    
+
     def check(self):
         if(not self.value.isdigit()):
             raise Exception("Error-> plate must be number")
@@ -38,6 +41,7 @@ class Date(Input):
 class Time(Input):
     def retrieve(self):
         self.value=input("Input time:\t")
+        
     def check(self):
         size=len(self.value.split(":"))
         if(size!=2):
