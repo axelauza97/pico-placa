@@ -1,4 +1,7 @@
+from Car import Car
 from Input import Plate,Date,Time
+from TransitAgent import TransitAgent
+import datetime
 
 class Main:
     '''Main'''
@@ -16,6 +19,13 @@ class Main:
             date.check()                 
             time.retrieve() 
             time.check()
+
+            agent=TransitAgent()
+            car=Car(plate.getValue())
+            dateStr = date.getValue()+" "+time.getValue()+":00"
+            dateObj = datetime.datetime.strptime(dateStr, '%d/%m/%y %H:%M:%S')
+            agent.checkCar(car,dateObj)
+            print(car)
             try:                
                 option=int(input("0.\tValidate\n1.\tExit\n"))
             except:
