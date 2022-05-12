@@ -17,7 +17,10 @@ class TransitAgent:
         weekday=testDatetime.weekday()
         lastDigit=str(car.getPlatenumber())[-1]
         dateReestrict=datetime.datetime(testDatetime.year, testDatetime.month, testDatetime.day)
-        reestrictPlates=self.dayReestrictions[str(weekday)]
+        reestrictPlates=self.dayReestrictions.get(str(weekday),"")
+        if(reestrictPlates==""):
+            car.enableDrive()
+            return True
 
         if(lastDigit in reestrictPlates):   
             for key, value in self.intervalReestrictions.items():
